@@ -8,18 +8,71 @@ Het doel van de bachelorproef is het ontwikkelen en implementeren van een robuus
 Dit project is van bijzonder belang voor het verbeteren van de beoordeling van de geestelijke gezondheidszorg door middel van camera-gebaseerde gezondheidsmetingen. Het onderzoek beoogt bij te dragen aan de vooruitgang op dit gebied door gebruik te maken van geavanceerde algoritmen om leeftijd en geslacht nauwkeurig te voorspellen aan de hand van gezichtsbeelden.  
 De literatuurstudie biedt een inzicht in facial analysis, de bestaande machine learning modellen en hun functionaliteiten. De proof-of-concept zal bestaan uit het ontwikkelen van een machine learning pipeline dat in staat is om leeftijd en geslacht te voorspellen op basis van bestaande datasets. De pipeline omvat verschillende image preprocessing technieken om de dataset voor te bereiden op de modeltraining. Om betrouwbaarheid en accuracy te garanderen, worden de modellen verfijnd en geoptimaliseerd om de hoogst mogelijke nauwkeurigheid te bereiken bij het schatten van leeftijd en geslacht.
 
-\section{State-of-the-art}%
-\label{sec:state-of-the-art}
+\section{Stand van zaken}
+\label{sec:stand-van-zaken}
 
-Hier beschrijf je de \emph{state-of-the-art} rondom je gekozen onderzoeksdomein, d.w.z.\ een inleidende, doorlopende tekst over het onderzoeksdomein van je bachelorproef. Je steunt daarbij heel sterk op de professionele \emph{vakliteratuur}, en niet zozeer op populariserende teksten voor een breed publiek. Wat is de huidige stand van zaken in dit domein, en wat zijn nog eventuele open vragen (die misschien de aanleiding waren tot je onderzoeksvraag!)?
+Gezichtsanalyse bestaat uit het definiëren van menselijke gezichten in real-time, met behulp van computeralgoritmen en machine learning-technieken. Voor computersystemen bevat een gezichtsbeeld details zoals leeftijd, geslacht, stemming, ras, et cetera. 
+Gezichtsanalyse omvat dan ook het lokaliseren en kwantificeren van gezichtskenmerken in een afbeelding. Vervolgens wordt het gezichtsbeeld geanalyseerd voor het extraheren van kenmerken \autocite{Sanil2023}. Gezichtsanalyse speelt dan ook een grote rol in real-world applicaties, zoals animatie, identiteitsverificatie, medische diagnose, et cetera. Ondanks het bestaande onderzoekswerk over dit onderwerp, is gezichtsanalyse nog steeds een lastige taak vanwege verschillende factoren zoals veranderingen in hoek, gezichtsuitdrukkingen en achtergrond \autocite{Siddiqi2022}. 
+Volgens onderzoek van \textcite{BasystiukMR23} is beeldherkenning een simpele procedure die slechts uit 3 stappen bestaat. 
+\begin{enumerate}
+    \item Preprocessing: We voegen filters toe aan de afbeelding om het geschikter te maken voor herkenning.
+    \item Feature Extractie: We identificeren belangrijke data en behouden deze om mee verder te werken. Dit wordt verder besproken in \ref{sub:gezichtsdetectie}
+    \item Classificatie: het analyseren en identificeren van de  data na de feature extractie.
+\end{enumerate}
 
-Je mag de titel van deze sectie ook aanpassen (literatuurstudie, stand van zaken, enz.). Zijn er al gelijkaardige onderzoeken gevoerd? Wat concluderen ze? Wat is het verschil met jouw onderzoek?
+\subsection{Gezichtsdetectie}
+\label{sub:gezichtsdetectie}
+Gezichtsdetectie is de eerste stap in het bepalen van de gezichtsfeatures. Deze features zijn de interessante delen van het gezicht, bijvoorbeeld ogen, neus en mond en worden ook wel eens landmarks genoemd \autocite{Coppens2018}. In dit onderzoek worden 3 gezichtsdetectieservices aangeraden: Microsoft Face API, Face++ en Kairos. Deze zijn alle 3 ook geschikt om geslacht en leeftijd te voorspellen. Er wordt met 3 services tegelijk gewerkt om elkaars beperkingen op te vangen. 
+In het onderzoek van \textcite{Sanil2023} worden de landmarks berekend op 2 verschillende methoden: Euclidische afstand en Geodetische afstand. 
+\textcite{Sanil2023} stelt 468 landmarks visueel voor, in plaats van 68, om de accuracy te verbeteren. Dit door gebruik te maken van de Mediapipe library (\textcite{Zubair2021}) te gebruiken. Op figuur (~\ref{fig:landmarks}) staan de belangrijkste anthropometrische landmarks aangeduid. Het is noodzakelijk om de belangrijkste features te identificeren die kunnen leiden tot het correct voorspellen van de leeftijd of het geslacht. Om de leeftijd te voorspellen kunnen we bijvoorbeeld de rimpels op de gezichtsfoto analyseren \autocite{Kwon1994}. 
+\begin{figure}
+    \centering
+    \includegraphics[width=\columnwidth]{graphics/faciallandmarks.png}
+    \caption{\label{fig:landmarks}De belangrijkste anthropometrische landmarks\autocite{Sanil2023}.}
+\end{figure}
 
-Verwijs bij elke introductie van een term of bewering over het domein naar de vakliteratuur, bijvoorbeeld~\autocite{Hykes2013}! Denk zeker goed na welke werken je refereert en waarom.
+\subsubsection{Normalisatie}
+In onderzoek van \autocite{Chen2011} werden de gezichtsafbeeldingen genormaliseerd voor de feature extraction plaats vond. De geometrie van de afbeeldingen kan worden genormaliseerd op basis van de gedetecteerde features, zoals oog of mond coördinatie. Er wordt een mask gebruikt om de pixels die niet in de ovaal van de typische gezichtsregio zitten worden verwijdert. Dit gaat dan over bijvoorbeeld over haar en hemdkragen. Zo blijven enkel de belangrijkste features van het gezicht over. Figuur (~\ref{fig:beforenormalisation}) geeft een voorbeeld van een dataset met gezichtsfoto's. In figuur {~\ref{fig:afternormalisation}} worden deze afbeeldingen genormaliseerd, waardoor er minder variaties overblijven in de afbeeldingen en we bijvoorbeeld al geen achtergrond meer overhouden.
+\begin{figure}
+    \centering
+    \includegraphics[width=\columnwidth]{graphics/beforenorm.PNG}
+    \caption{\label{fig:beforenormalisation}Gezichtsafbeeldingen voor normalisatie\autocite{Chen2011}.}
+\end{figure}
+\begin{figure}
+    \centering
+    \includegraphics[width=\columnwidth]{graphics/afternorm.PNG}
+    \caption{\label{fig:afternormalisation}Gezichtsafbeeldingen na het toepassen van normalisatie\autocite{Chen2011}.}
+\end{figure}  
 
-Draag zorg voor correcte literatuurverwijzingen! Een bronvermelding hoort thuis \emph{binnen} de zin waar je je op die bron baseert, dus niet er buiten! Maak meteen een verwijzing als je gebruik maakt van een bron. Doe dit dus \emph{niet} aan het einde van een lange paragraaf. Baseer nooit teveel aansluitende tekst op eenzelfde bron.
+\subsection{Bestaande uitdagingen}
+Ondanks het onderzoekwerk, heersen er nog vele uitdagingen op het vlak van gezichtsanalyse. Deze uitdagingen zijn het gevolg van verschillende factoren zoals gezichtsuitdrukkingen, ruis, belichting, et cetera. Om de nauwkeruigheid van de gezichtsherkenning te verbeteren, is het belangrijk om taken van de gezichtsanalyse met elkaar te correleren. Het is bijvoorbeeld zeer waarschijnlijk dat mannen een baard of snor kunnen hebben, maar vrouwen en kinderen niet \autocite{Siddiqi2022}.  Ook is het detecteren van de locatie waar de gezichten zich bevinden op de afbeelding een uitdaging. Dit wordt vaak meegenomen in de preprocessing stap van het analysesysteem \autocite{Jiang2008}. 
+De problemen situeren zich niet enkel op het vlak van de afbeelding, maar ook bij de machine learning modellen. Eén van de grootste problemen hierbij is overfitting. Dit gebeurt wanneer het algoritme te veel getraind wordt waardoor het te hard lijkt op de trainingsdata. Hierdoor zal het systeem falen wanneer er nieuwe data moet worden geclassificeerd \autocite{Coppens2018}.
 
-Als je informatie over bronnen verzamelt in JabRef, zorg er dan voor dat alle nodige info aanwezig is om de bron terug te vinden (zoals uitvoerig besproken in de lessen Research Methods).
+\subsection{Bestaande Machine-Learning technieken}
+Uit onderzoek van \textcite{Sanil2023} bleek dat Extreme gradient boosting de beste resultaten gaf, met een accuracy van 78\%, gevolgd door Adaptive Boosting (77\%) en Random Forest (75\%). Onderzoek van \autocite{Khan2017} gebruikt dan weer een Ensemble systeem. Een set van 30 Lineaire Discriminant Analyse (LDA) dienen als basis classifiers en dragen bij tot het ensemble. Het ensemble gebruikt de gecombineerde classificatiecapaciteiten van de base classificiers, zo verbeteren we de algehele prestaties. De volledige pipeline voor de gezichtsanalyse vinden we in figuur (~\ref{fig:ensemble}). 
+\begin{figure}
+    \centering
+    \includegraphics[width=\columnwidth]{graphics/ensemble.png}
+    \caption{\label{fig:ensemble}Robuust Gezichtsherkenning systeem\autocite{Khan2017}.}
+\end{figure}
+
+\subsubsection{Extreme Gradient Boost}
+\label{subsub:xgboost}
+Extreme Gradient Boost, ofwel XGBoost, is een supervised learning model, waar trainingdata, met meerdere features, x\textsubscript{i} wordt gebruikt om target waarde y\textsubscript{i} te voorspellen \autocite{XGBoost2023}. Uit onderzoek van \autocite{Chen2023}, waarbij vermoeidheid werd voorspeld op basis van gezichtsafbeeldingen met XGBoost wordt een boom aangemaakt op basis van de geleverde features. Dit model gaf een hoge accuracy en is minder gevoelig voor noise. 
+
+\subsubsection{Adaptive Boosting}
+\label{subsub:adaboost}
+De Adaptive Boost, of AdaBoost, is typisch een classificatie tussen twee klassen. Om het herkenningsprobleem met meerdere klassen op te lossen op te lossen, kan een majority voting (MV) strategie worden gebruikt om alle paarsgewijze classificatieresultaten te combineren. Hierbij kiezen we de meest voorkomende klasse als voorspelling. AdaBoost is een adaptief algoritme om een reeks classificeerders te boosten, in die zin dat de gewichten dynamisch worden bijgewerkt op basis van de fouten in eerdere leerresultaten \autocite{Guo2001}.
+
+\subsubsection{Random Forest Classifier}
+\label{subsub:randomforest}
+Random forests zijn verzamelingen decision trees die elk getraind zijn op een willekeurig gekozen deelverzameling van de beschikbare data. Deze decision trees worden willekeruig door de trainingsvoorbeelden die aan elke boom worden gegeven,  maar ook door een willekeurige subset van tests die beschikbaar zijn voor optimalisatie op elke node \autocite{Fanelli2012}. 
+Een voorbeeld voor het gebruik van Random Forest in gezichtsanalyse is figuur((~\ref{fig:randomforest}))). Hierbij wordt een boom getoond voor het  schatten van de houding van het hoofd. 
+\begin{figure}
+    \centering
+    \includegraphics[width=\columnwidth]{graphics/headposition.png}
+    \caption{\label{fig:randomforest}Voorbeeld van een random forest voor het schatten van de houding van het hoofd\autocite{Fanelli2012}.}
+\end{figure}
 
 % Voor literatuurverwijzingen zijn er twee belangrijke commando's:
 % \autocite{KEY} => (Auteur, jaartal) Gebruik dit als de naam van de auteur
@@ -28,7 +81,6 @@ Als je informatie over bronnen verzamelt in JabRef, zorg er dan voor dat alle no
 %   functie heeft in de zin (bv. ``Uit onderzoek door Doll & Hill (1954) bleek
 %   ...'')
 
-Je mag deze sectie nog verder onderverdelen in subsecties als dit de structuur van de tekst kan verduidelijken.
 
 %---------- Methodologie ------------------------------------------------------
 \section{Methodologie}%
