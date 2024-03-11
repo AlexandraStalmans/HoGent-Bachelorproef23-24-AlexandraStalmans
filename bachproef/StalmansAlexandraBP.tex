@@ -1,0 +1,190 @@
+%===============================================================================
+% LaTeX sjabloon voor de bachelorproef toegepaste informatica aan HOGENT
+% Meer info op https://github.com/HoGentTIN/latex-hogent-report
+%===============================================================================
+
+\documentclass[dutch,dit,thesis]{hogentreport}
+
+
+% TODO:
+% - If necessary, replace the option `dit`' with your own department!
+%   Valid entries are dbo, dbt, dgz, dit, dlo, dog, dsa, soa
+% - If you write your thesis in English (remark: only possible after getting
+%   explicit approval!), remove the option "dutch," or replace with "english".
+
+\usepackage{lipsum} % For blind text, can be removed after adding actual content
+\usepackage[backend=biber,style=apa]{biblatex}
+
+%% Pictures to include in the text can be put isn the graphics/ folder
+\graphicspath{{graphics/}}
+
+%% For source code highlighting, requires pygments to be installed
+%% Compile with the -shell-escape flag!
+\usepackage[section]{minted}
+\usepackage{amsmath}
+\usepackage{enumitem}
+
+
+%% If you compile with the make_thesis.{bat,sh} script, use the following
+%% import instead:
+%% \usepackage[section,outputdir=../output]{minted}
+\usemintedstyle{solarized-light}
+\definecolor{bg}{RGB}{253,246,227} %% Set the background color of the codeframe
+
+%% Change this line to edit the line numbering style:
+\renewcommand{\theFancyVerbLine}{\ttfamily\scriptsize\arabic{FancyVerbLine}}
+
+%% Macro definition to load external java source files with \javacode{filename}:
+\newmintedfile[javacode]{java}{
+    bgcolor=bg,
+    fontfamily=tt,
+    linenos=true,
+    numberblanklines=true,
+    numbersep=5pt,
+    gobble=0,
+    framesep=2mm,
+    funcnamehighlighting=true,
+    tabsize=4,
+    obeytabs=false,
+    breaklines=true,
+    mathescape=false
+    samepage=false,
+    showspaces=false,
+    showtabs =false,
+    texcl=false,
+}
+
+% Other packages not already included can be imported here
+
+%%---------- Document metadata -------------------------------------------------
+% TODO: Replace this with your own information
+\author{Alexandra Stalmans}
+\supervisor{Mevr. C. De Leenheer}
+\cosupervisor{Dhr. T. Sanglet}
+\title[]%
+{Machine Learning pipeline voor Facial Image Analysis in camera-gebaseerde gezondheidsmetingen: Schatten van leeftijd en geslacht voor het beoordelen van geestelijke gezondheid}
+\academicyear{\advance\year by -1 \the\year--\advance\year by 1 \the\year}
+\examperiod{1}
+\degreesought{\IfLanguageName{dutch}{Professionele bachelor in de toegepaste informatica}{Bachelor of applied computer science}}
+\partialthesis{false} %% To display 'in partial fulfilment'
+%\institution{Internshipcompany BVBA.}
+
+%% Add global exceptions to the hyphenation here
+\hyphenation{back-slash}
+
+% The bibliography (style and settings are  found in hogentthesis.cls)
+
+%\addbibresource{bachproef.bib}
+%\addbibresource{../voorstel/voorstel.bib} %% Bibliography research proposal
+\defbibheading{bibempty}{}
+
+%% Prevent empty pages for right-handed chapter starts in twoside mode
+\renewcommand{\cleardoublepage}{\clearpage}
+
+\renewcommand{\arraystretch}{1.2}
+
+%% Content starts here.
+\begin{document}
+    
+    %---------- Front matter -------------------------------------------------------
+    
+    \frontmatter
+    
+    \hypersetup{pageanchor=false} %% Disable page numbering references
+    %% Render a Dutch outer title page if the main language is English
+    \IfLanguageName{english}{%
+        %% If necessary, information can be changed here
+        \degreesought{Professionele Bachelor toegepaste informatica}%
+        \begin{otherlanguage}{dutch}%
+            \maketitle%
+        \end{otherlanguage}%
+    }{}
+    
+    %% Generates title page content
+    \maketitle
+    \hypersetup{pageanchor=true}
+    
+    \input{voorwoord}
+    \input{samenvatting}
+    
+    %---------- Inhoud, lijst figuren, ... -----------------------------------------
+    
+    \tableofcontents
+    
+    % In a list of figures, the complete caption will be included. To prevent this,
+    % ALWAYS add a short description in the caption!
+    %
+    %  \caption[short description]{elaborate description}
+    %
+    % If you do, only the short description will be used in the list of figures
+    
+    \listoffigures
+    
+    % If you included tables and/or source code listings, uncomment the appropriate
+    % lines.
+    %\listoftables
+    %\listoflistings
+    
+    % Als je een lijst van ingeingen of termen wil toevoegen, dan hoort die
+    % hier thuis. Gebruik bijvoorbeeld de ``glossaries'' package.
+    % https://www.overleaf.com/learn/latex/Glossaries
+    
+    
+    %---------- Kern ---------------------------------------------------------------
+    
+    \mainmatter{}
+    
+    % De eerste hoofdstukken van een bachelorproef zijn meestal een inleiding op
+    % het onderwerp, literatuurstudie en verantwoording methodologie.
+    % Aarzel niet om een meer beschrijvende titel aan deze hoofdstukken te geven of
+    % om bijvoorbeeld de inleiding en/of stand van zaken over meerdere hoofdstukken
+    % te verspreiden!
+
+    
+    
+    \input{inleiding}
+    \input{standvanzaken}
+    \input{methodologie}
+    
+    % Voeg hier je eigen hoofdstukken toe die de ``corpus'' van je bachelorproef
+    % vormen. De structuur en titels hangen af van je eigen onderzoek. Je kan bv.
+    % elke fase in je onderzoek in een apart hoofdstuk bespreken.
+    
+    %\input{...}
+    %...
+    
+    \input{conclusie}
+    
+    %---------- Bijlagen -----------------------------------------------------------
+    
+    \appendix
+    
+    \chapter{Onderzoeksvoorstel}
+    
+    Het onderwerp van deze bachelorproef is gebaseerd op een onderzoeksvoorstel dat vooraf werd beoordeeld door de promotor. Dat voorstel is opgenomen in deze bijlage.
+    
+    %% TODO: 
+    \section*{Samenvatting}
+    
+    % Kopieer en plak hier de samenvatting (abstract) van je onderzoeksvoorstel.
+    Gezichtsanalyse heeft de laatste jaren veel aandacht gekregen vanwege de brede toepassingen op verschillende gebieden, zoals gezondheidszorg, beveiliging en marketing.  
+    De focus van de bachelorproef ligt op het ontwikkelen en implementeren van een robuust systeem voor het schatten van leeftijd en geslacht op basis van gezichtsfoto’s, met behulp van machine learning technieken. Dit onderzoek is van bijzonder belang voor het verbeteren van de beoordeling van geestelijke gezondheidszorg door camera-gebaseerde gezondheidsmetingen. Deze inspanningen dragen bij aan de doelstellingen van IntelliProve, een platform dat online gezondheidsoplossingen biedt. Er wordt onderzocht welke machine learning technieken de beste resultaten tonen en uit welke elementen de volledige pipeline zal bestaan.   
+    In de eerste fase van het onderzoek wordt een literatuurstudie uitgevoerd om uit bestaand onderzoek de gebruikte modellen te verkennen en hun sterktes, limitaties en performantie te achterhalen. In de proof-of-concept gebeurt eerst de preprocessing, feature extractie en gezichtsdetectie. Daarna worden de modellen uit de literatuurstudie getest op bestaande datasets en wordt een prestatie-evaluatie opgesteld op basis van metrieken zoals accuracy, precision, recall, F1-score en ROC curve. Het verwachte resultaat is een robuuste machine learning pipeline waarmee IntelliProve de leeftijd en het geslacht kan voorspellen op basis van een gezichtsafbeelding. 
+    
+    % Verwijzing naar het bestand met de inhoud van het onderzoeksvoorstel
+    \input{../voorstel/voorstel-inhoud}
+    
+    %%---------- Andere bijlagen --------------------------------------------------
+    % TODO: Voeg hier eventuele andere bijlagen toe. Bv. als je deze BP voor de
+    % tweede keer indient, een overzicht van de verbeteringen t.o.v. het origineel.
+    %\input{...}
+    
+    %%---------- Backmatter, referentielijst ---------------------------------------
+    
+    
+    \backmatter{}
+    
+    \setlength\bibitemsep{2pt} %% Add Some space between the bibliograpy entries
+    \printbibliography[heading=bibintoc]
+    
+\end{document}

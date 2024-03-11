@@ -5,32 +5,46 @@
 \chapter{\IfLanguageName{dutch}{Inleiding}{Introduction}}%
 \label{ch:inleiding}
 
-De inleiding moet de lezer net genoeg informatie verschaffen om het onderwerp te begrijpen en in te zien waarom de onderzoeksvraag de moeite waard is om te onderzoeken. In de inleiding ga je literatuurverwijzingen beperken, zodat de tekst vlot leesbaar blijft. Je kan de inleiding verder onderverdelen in secties als dit de tekst verduidelijkt. Zaken die aan bod kunnen komen in de inleiding~\autocite{Pollefliet2011}:
+De onderzoeksvraag werd aangeboden door het bedrijf IntelliProve. IntelliProve biedt online gezondheidsoplossingen, een software die in staat is om binnen enkele seconden nauwkeurig gezondheidsparameters te bepalen, gebaseerd op een optische meting van het gezicht. Het doel van de bachelorproef is het ontwikkelen en implementeren van een robuust systeem voor het schatten van de leeftijd en het geslacht van personen op basis van gezichtsfoto’s, met behulp van machine learning-technieken. Dit project is van bijzonder belang voor het verbeteren van de beoordeling van de geestelijke gezondheidszorg door middel van camera-gebaseerde gezondheidsmetingen. Het onderzoek beoogt bij te dragen aan de vooruitgang op dit gebied door gebruik te maken van geavanceerde algoritmen om leeftijd en geslacht nauwkeurig te voorspellen aan de hand van gezichtsbeelden. De literatuurstudie biedt een inzicht in facial analysis, de bestaande machine learning modellen en hun functionaliteiten. De proof-of-concept zal bestaan uit het ontwikkelen van een machine learning pipeline die in staat is om leeftijd en geslacht te voorspellen op basis van bestaande datasets. De pipeline omvat verschillende image preprocessing technieken om de dataset voor te bereiden op de modeltraining. Om betrouwbaarheid en accuracy te garanderen, worden de modellen verfijnd en geoptimaliseerd om de hoogst mogelijke nauwkeurigheid te bereiken bij het schatten van leeftijd en geslacht.
 
-\begin{itemize}
-  \item context, achtergrond
-  \item afbakenen van het onderwerp
-  \item verantwoording van het onderwerp, methodologie
-  \item probleemstelling
-  \item onderzoeksdoelstelling
-  \item onderzoeksvraag
-  \item \ldots
-\end{itemize}
 
 \section{\IfLanguageName{dutch}{Probleemstelling}{Problem Statement}}%
 \label{sec:probleemstelling}
 
-Uit je probleemstelling moet duidelijk zijn dat je onderzoek een meerwaarde heeft voor een concrete doelgroep. De doelgroep moet goed gedefinieerd en afgelijnd zijn. Doelgroepen als ``bedrijven,'' ``KMO's'', systeembeheerders, enz.~zijn nog te vaag. Als je een lijstje kan maken van de personen/organisaties die een meerwaarde zullen vinden in deze bachelorproef (dit is eigenlijk je steekproefkader), dan is dat een indicatie dat de doelgroep goed gedefinieerd is. Dit kan een enkel bedrijf zijn of zelfs één persoon (je co-promotor/opdrachtgever).
+Het onderzoek wordt uitgevoerd voor het bedrijf IntelliProve. IntelliProve biedt online gezondheidsoplossingen, een software die in staat is om binnen enkele seconden nauwkeurig gezondheidsparameters te bepalen, gebaseerd op een optische meting van het gezicht. De bachelorproef vormt een opstap naar een applicatie die in de toekomst uitgewerkt zal worden. 
 
 \section{\IfLanguageName{dutch}{Onderzoeksvraag}{Research question}}%
 \label{sec:onderzoeksvraag}
+Het onderzoek beschrijft de ontwikkeling van een machine learning pipeline voor het schatten van leeftijd en geslacht. Specifiek voor het analyseren van gezichtsafbeeldingen in camera-gebaseerde gezondheidsmetingen. Voor het onderzoek werd volgende onderzoeksvraag opgesteld: 
+\begin{itemize}
+    \item Hoe kan een efficiënte machine learning-pipeline worden ontwikkeld en geoptimaliseerd voor het analyseren van gezichtsafbeeldingen in camera-gebaseerde gezondheidsmetingen, met als specifieke doelen het schatten van leeftijd en geslacht, toegepast om geestelijke gezondheid te beoordelen?
+\end{itemize} \\
+\\
+De onderzoeksvraag kan opgedeeld worden in enkele deelvragen:
 
-Wees zo concreet mogelijk bij het formuleren van je onderzoeksvraag. Een onderzoeksvraag is trouwens iets waar nog niemand op dit moment een antwoord heeft (voor zover je kan nagaan). Het opzoeken van bestaande informatie (bv. ``welke tools bestaan er voor deze toepassing?'') is dus geen onderzoeksvraag. Je kan de onderzoeksvraag verder specifiëren in deelvragen. Bv.~als je onderzoek gaat over performantiemetingen, dan 
+\begin{enumerate}
+    \item Wat is de geschikte dataset voor het opgegeven probleem om zo veel mogelijk bias te vermijden? 
+    \item Welke uitdagingen bestaan er al uit voorgaand onderzoek en moet rekening mee gehouden worden in het onderzoek?
+    \item Uit welke stappen bestaat de machine learning pipeline?
+     \begin{enumerate}
+         \item Welke feature extractie en/of feature dimensionaliteitsreductie toepassingen zijn het meest geschikt voor het voorspellen van leeftijd en/of geslacht?
+     \end{enumerate}
+    \item Welke machine learning modellen zijn er mogelijk voor het voorspellen van leeftijd en geslacht? 
+     \begin{enumerate}
+        \item Wordt er 1 model gemaakt om leeftijd en geslacht te voorspellen of worden er 2 modellen gebruikt die zich elk richten tot een specifieke taak?
+        \item Welk model, uit een vergelijkende studie, geeft de beste resultaten?
+    \end{enumerate}
+    \item Hoe kunnen we de performantie van een model meten?
+    
+\end{enumerate}
+
+
 
 \section{\IfLanguageName{dutch}{Onderzoeksdoelstelling}{Research objective}}%
 \label{sec:onderzoeksdoelstelling}
 
-Wat is het beoogde resultaat van je bachelorproef? Wat zijn de criteria voor succes? Beschrijf die zo concreet mogelijk. Gaat het bv.\ om een proof-of-concept, een prototype, een verslag met aanbevelingen, een vergelijkende studie, enz.
+Het resultaat van de bachelorproef is een proof-of-concept die zal bestaan uit het ontwikkelen van een machine learning pipeline die in staat is om leeftijd en geslacht te voorspellen op basis van bestaande datasets. De pipeline omvat verschillende image preprocessing technieken om de dataset voor te bereiden op de modeltraining. Om betrouwbaarheid en accuracy te garanderen, worden de modellen verfijnd en geoptimaliseerd om de hoogst mogelijke nauwkeurigheid te bereiken bij het schatten van leeftijd en geslacht. Er wordt naar een zo hoog mogelijk nauwkeurigheid gestreefd, waarbij de conclusies uit dit onderzoek het belangrijkste zijn. Er kan aangegeven worden waarom bepaalde modellen goed werken of juist niet en of er in de toekomst nog verder onderzoek vereist is. 
+
 
 \section{\IfLanguageName{dutch}{Opzet van deze bachelorproef}{Structure of this bachelor thesis}}%
 \label{sec:opzet-bachelorproef}
@@ -41,7 +55,7 @@ Wat is het beoogde resultaat van je bachelorproef? Wat zijn de criteria voor suc
 
 De rest van deze bachelorproef is als volgt opgebouwd:
 
-In Hoofdstuk~\ref{ch:stand-van-zaken} wordt een overzicht gegeven van de stand van zaken binnen het onderzoeksdomein, op basis van een literatuurstudie.
+In Hoofdstuk~\ref{ch:standvanzaken} wordt een overzicht gegeven van de stand van zaken binnen het onderzoeksdomein, op basis van een literatuurstudie.
 
 In Hoofdstuk~\ref{ch:methodologie} wordt de methodologie toegelicht en worden de gebruikte onderzoekstechnieken besproken om een antwoord te kunnen formuleren op de onderzoeksvragen.
 

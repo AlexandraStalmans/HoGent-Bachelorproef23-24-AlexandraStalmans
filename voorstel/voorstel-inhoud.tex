@@ -1,7 +1,7 @@
 %---------- Inleiding ---------------------------------------------------------
 
 \section{Introductie}%
-\label{sec:introductie}
+\label{sec:vintroductie}
 
 De onderzoeksvraag werd aangeboden door het bedrijf IntelliProve. IntelliProve biedt online gezondheidsoplossingen, een software die in staat is om binnen enkele seconden nauwkeurig gezondheidsparameters te bepalen, gebaseerd op een optische meting van het gezicht.  
 Het doel van de bachelorproef is het ontwikkelen en implementeren van een robuust systeem voor het schatten van de leeftijd en het geslacht van personen op basis van gezichtsfoto's, met behulp van machine learning-technieken. 
@@ -9,71 +9,71 @@ Dit project is van bijzonder belang voor het verbeteren van de beoordeling van d
 De literatuurstudie biedt een inzicht in facial analysis, de bestaande machine learning modellen en hun functionaliteiten. De proof-of-concept zal bestaan uit het ontwikkelen van een machine learning pipeline die in staat is om leeftijd en geslacht te voorspellen op basis van bestaande datasets. De pipeline omvat verschillende image preprocessing technieken om de dataset voor te bereiden op de modeltraining. Om betrouwbaarheid en accuracy te garanderen, worden de modellen verfijnd en geoptimaliseerd om de hoogst mogelijke nauwkeurigheid te bereiken bij het schatten van leeftijd en geslacht.
 
 \section{Stand van zaken}
-\label{sec:stand-van-zaken}
+\label{sec:vstand-van-zaken}
 
 Gezichtsanalyse bestaat uit het definiëren van menselijke gezichten in real time, met behulp van computeralgoritmen en machine learning technieken. Voor mensen en computersystemen bevat een gezichtsbeeld details zoals leeftijd, geslacht, stemming, afkomst, et cetera.
 Gezichtsanalyse omvat dan ook het lokaliseren en meten van gezichtskenmerken in een afbeelding. Vervolgens wordt het gezichtsbeeld geanalyseerd voor het extraheren van kenmerken \autocite{Sanil2023}. Gezichtsanalyse speelt dan ook een grote rol in real world applicaties, zoals animatie, identiteitsverificatie, medische diagnose, et cetera. Ondanks het bestaande onderzoekswerk over dit onderwerp, is gezichtsanalyse nog steeds een lastige taak vanwege verschillende factoren zoals veranderingen in hoek, gezichtsuitdrukkingen en achtergrond \autocite{Siddiqi2022}.
 
-Volgens onderzoek van \textcite{BasystiukMR23} is beeldherkenning een simpele procedure die slechts uit 3 stappen bestaat. 
+Volgens onderzoek van \textcite{Basystiuk2023} is beeldherkenning een simpele procedure die slechts uit 3 stappen bestaat. 
 \begin{enumerate}
-    \item Preprocessing: We voegen filters toe aan de afbeelding om het geschikter te maken voor herkenning.
-    \item Feature Extractie: We identificeren belangrijke data en behouden deze om mee verder te werken. Dit wordt verder besproken in \ref{sub:gezichtsdetectie}
-    \item Classificatie: het analyseren en identificeren van de  data na de feature extractie.
+    \item{Preprocessing: We voegen filters toe aan de afbeelding om het geschikter te maken voor herkenning.}
+    \item{Feature Extractie: We identificeren belangrijke data en behouden deze om mee verder te werken. Dit wordt verder besproken in \ref{sub:vgezichtsdetectie}}
+    \item{Classificatie: het analyseren en identificeren van de  data na de feature extractie.}
 \end{enumerate}
 
-\subsection{Gezichtsdetectie}
-\label{sub:gezichtsdetectie}
-Gezichtsdetectie is de eerste stap in het bepalen van de gezichtsfeatures. Deze features zijn de interessante delen van het gezicht , bijvoorbeeld ogen, neus en mond en worden ook wel eens landmarks genoemd \autocite{Coppens2018}. In dit onderzoek raadt de auteur 3 gezichtsdetectieservices aan: Microsoft Face API, Face++ en Kairos. Deze zijn alle 3 ook geschikt om geslacht en leeftijd te voorspellen. Er wordt met 3 services tegelijk gewerkt om elkaars beperkingen op te vangen.
+\subsection{Gezichtsdetectie}\label{sub:vgezichtsdetectie}
+Gezichtsdetectie is de eerste stap in het bepalen van de gezichtsfeatures. Deze features zijn de interessante delen van het gezicht , bijvoorbeeld ogen, neus en mond en worden ook wel eens landmarks genoemd \autocite{Coppens2018}. In dit onderzoek raadt de auteur 3 gezichtsdetectieservices aan: Microsoft Face API, Face++ en Kairos. Deze zijn alle 3 ook geschikt om geslacht en leeftijd t
+e voorspellen. Er wordt met 3 services tegelijk gewerkt om elkaars beperkingen op te vangen.
 In het onderzoek van \textcite{Sanil2023} berekenen ze de landmarks op 2 verschillende methoden: Euclidische afstand en Geodetische afstand.
 
-\textcite{Sanil2023} stelt 468 landmarks visueel voor, in plaats van 68, om de accuracy te verbeteren. Dit door gebruik te maken van de Mediapipe library (\textcite{Zubair2021}). Op figuur {~\ref{fig:landmarks}} staan de belangrijkste antropometrische landmarks aangeduid . Het is noodzakelijk om de belangrijkste features te identificeren die kunnen leiden tot het correct voorspellen van de leeftijd of het geslacht. Om de leeftijd te voorspellen kunnen we bijvoorbeeld de rimpels op de gezichtsfoto analyseren \autocite{Kwon1994}. 
+\textcite{Sanil2023} stelt 468 landmarks visueel voor, in plaats van 68, om de accuracy te verbeteren. Dit door gebruik te maken van de Mediapipe library (\textcite{Zubair2021}). Op figuur {~\ref{fig:vlandmarks}} staan de belangrijkste antropometrische landmarks aangeduid . Het is noodzakelijk om de belangrijkste features te identificeren die kunnen leiden tot het correct voorspellen van de leeftijd of het geslacht. Om de leeftijd te voorspellen kunnen we bijvoorbeeld de rimpels op de gezichtsfoto analyseren \autocite{Kwon1994}. 
 \begin{figure}
     \centering
-    \includegraphics[width=\columnwidth]{graphics/faciallandmarks.png}
-    \caption{\label{fig:landmarks}De belangrijkste anthropometrische landmarks\autocite{Sanil2023}.}
+    \includegraphics{graphics/faciallandmarks.png}
+    \caption[Belangrijkste anthropometrische landmarks]{\label{fig:vlandmarks}De belangrijkste anthropometrische landmarks\autocite{Sanil2023}.}
 \end{figure}
 
 \subsubsection{Normalisatie}
-In onderzoek van \autocite{Chen2011} voor het voorspellen van leeftijd op basis van afbeeldingen werden de gezichtsafbeeldingen genormaliseerd voor de feature extraction plaatsvond. De geometrie van de afbeeldingen kan worden genormaliseerd op basis van de gedetecteerde features, zoals oog of mond coördinatie. De auteur maakt gebruik van een mask om de pixels die zich niet in de ovaal van de typsiche gezichtsregio bevinden te verwijderen. Dit gaat dan bijvoorbeeld over haar en hemdskragen. Zo blijven enkel de belangrijkste features van het gezicht over. Figuur {~\ref{fig:beforenormalisation}} geeft een voorbeeld van een dataset met gezichtsfoto's. In figuur {~\ref{fig:afternormalisation}} worden deze afbeeldingen genormaliseerd, waardoor er minder variaties overblijven in de afbeeldingen en we bijvoorbeeld al geen achtergrond overhouden.
+In onderzoek van \autocite{Chen2011} voor het voorspellen van leeftijd op basis van afbeeldingen werden de gezichtsafbeeldingen genormaliseerd voor de feature extraction plaatsvond. De geometrie van de afbeeldingen kan worden genormaliseerd op basis van de gedetecteerde features, zoals oog of mond coördinatie. De auteur maakt gebruik van een mask om de pixels die zich niet in de ovaal van de typsiche gezichtsregio bevinden te verwijderen. Dit gaat dan bijvoorbeeld over haar en hemdskragen. Zo blijven enkel de belangrijkste features van het gezicht over. Figuur {~\ref{fig:vbeforenormalisation}} geeft een voorbeeld van een dataset met gezichtsfoto's. In figuur {~\ref{fig:vafternormalisation}} worden deze afbeeldingen genormaliseerd, waardoor er minder variaties overblijven in de afbeeldingen en we bijvoorbeeld al geen achtergrond overhouden.
 \begin{figure}
     \centering
-    \includegraphics[width=\columnwidth]{graphics/beforenorm.PNG}
-    \caption{\label{fig:beforenormalisation}Gezichtsafbeeldingen voor normalisatie\autocite{Chen2011}.}
+    \includegraphics{graphics/beforenorm.PNG}
+    \caption[Gezichtsafbeeldingen voor normalisatie]{\label{fig:vbeforenormalisation}Gezichtsafbeeldingen voor normalisatie\autocite{Chen2011}.}
 \end{figure}
 \begin{figure}
     \centering
-    \includegraphics[width=\columnwidth]{graphics/afternorm.PNG}
-    \caption{\label{fig:afternormalisation}Gezichtsafbeeldingen na het toepassen van normalisatie\autocite{Chen2011}.}
+    \includegraphics{graphics/afternorm.PNG}
+    \caption[Gezichtsafbeeldingen na normalisatie]{\label{fig:vafternormalisation}Gezichtsafbeeldingen na het toepassen van normalisatie\autocite{Chen2011}.}
 \end{figure}  
 
 \subsection{Bestaande Machine-Learning technieken}
 Uit onderzoek naar gezichtsdetectie van \textcite{Sanil2023} bleek dat Extreme gradient boosting de beste resultaten gaf, met een accuracy van 78\%, gevolgd door Adaptive Boosting (77\%) en Random Forest (75\%). Onderzoek van \autocite{Khan2017} gebruikt dan weer een Ensemble systeem. 
 
 \subsubsection{Extreme Gradient Boost}
-\label{subsub:xgboost}
+\label{subsub:vxgboost}
 Extreme Gradient Boost, ofwel XGBoost, is een supervised learning model, waar trainingdata, met meerdere features, x\textsubscript{i} wordt gebruikt om target waarde y\textsubscript{i} te voorspellen \autocite{XGBoost2023}. Uit onderzoek van \autocite{Chen2023}, waarbij vermoeidheid werd voorspeld op basis van gezichtsafbeeldingen met XGBoost, wordt een boom aangemaakt op basis van de geleverde features. Dit model gaf een hoge accuracy en is minder gevoelig voor noise. 
 
 \subsubsection{Adaptive Boosting}
-\label{subsub:adaboost}
+\label{subsub:vadaboost}
 De Adaptive Boost, of AdaBoost, is typisch een classificatie tussen twee klassen. Om het herkenningsprobleem met meerdere klassen op te lossen, kan een majority voting (MV) strategie worden gebruikt om alle paarsgewijze classificatieresultaten te combineren. Hierbij kiezen we de meest voorkomende klasse als voorspelling. AdaBoost is een adaptief algoritme om een reeks classificeerders te boosten, in die zin dat de gewichten dynamisch worden bijgewerkt op basis van de fouten in eerdere leerresultaten \autocite{Guo2001}.
 
 \subsubsection{Random Forest Classifier}
-\label{subsub:randomforest}
+\label{subsub:vrandomforest}
 Random forests zijn verzamelingen decision trees die elk getraind zijn op een willekeurig gekozen deelverzameling van de beschikbare data. Deze decision trees worden willekeurig door de trainingsvoorbeelden die aan elke boom worden gegeven,  maar ook door een willekeurige subset van tests die beschikbaar zijn voor optimalisatie op elke node \autocite{Fanelli2012}. 
-Een voorbeeld voor het gebruik van Random Forest in gezichtsanalyse is figuur {~\ref{fig:randomforest}}. Hierbij wordt een boom getoond voor het  schatten van de houding van het hoofd. 
+Een voorbeeld voor het gebruik van Random Forest in gezichtsanalyse is figuur {~\ref{fig:vrandomforest}}. Hierbij wordt een boom getoond voor het  schatten van de houding van het hoofd. 
 \begin{figure}
     \centering
     \includegraphics[width=\columnwidth]{graphics/headposition.png}
-    \caption{\label{fig:randomforest}Voorbeeld van een random forest voor het schatten van de houding van het hoofd\autocite{Fanelli2012}.}
+    \caption[Random forest voor houding van het hoofd]{\label{fig:vrandomforest}Voorbeeld van een random forest voor het schatten van de houding van het hoofd\autocite{Fanelli2012}.}
 \end{figure}
 
 \subsubsection{Ensemble}
-\label{subsub:ensemble}
-Een set van 30 Lineaire Discriminant Analyse (LDA) dienen als basis classifiers en dragen bij tot het ensemble in het model van \textcite{Khan2017}. Het ensemble gebruikt de gecombineerde classificatiecapaciteiten van de base classificiers, zo verbeteren we de algehele prestaties. De volledige pipeline voor de gezichtsanalyse vinden we in figuur {~\ref{fig:ensemble}}. 
+\label{subsub:vensemble}
+Een set van 30 Lineaire Discriminant Analyse (LDA) dienen als basis classifiers en dragen bij tot het ensemble in het model van \textcite{Khan2017}. Het ensemble gebruikt de gecombineerde classificatiecapaciteiten van de base classificiers, zo verbeteren we de algehele prestaties. De volledige pipeline voor de gezichtsanalyse vinden we in figuur {~\ref{fig:vensemble}}. 
 \begin{figure}
     \centering
     \includegraphics[width=\columnwidth]{graphics/ensemble.png}
-    \caption{\label{fig:ensemble}Robuust Gezichtsherkenning systeem\autocite{Khan2017}.}
+    \caption[Robuust gezichtsherkenning systeem]{\label{fig:vensemble}Robuust Gezichtsherkenning systeem\autocite{Khan2017}.}
 \end{figure}
 
 \subsection{Bestaande uitdagingen}
@@ -90,27 +90,27 @@ De problemen situeren zich niet enkel op het vlak van de afbeelding, maar ook bi
 
 %---------- Methodologie ------------------------------------------------------
 \section{Methodologie}%
-\label{sec:methodologie}
-Figuur {~\ref{fig:methodologie}} geeft een visuele representatie van de opgestelde methodologie.
+\label{sec:vmethodologie}
+Figuur {~\ref{fig:vmethodologie}} geeft een visuele representatie van de opgestelde methodologie.
 \begin{figure}
     \centering
     \includegraphics[width=\columnwidth]{graphics/flowchart.PNG}
-    \caption{\label{fig:methodologie}Methdologie voor het onderzoek.}
+    \caption[Methodologie]{\label{fig:vmethodologie}Methdologie voor het onderzoek.}
 \end{figure}
 
 \subsection{Requirements}
-\label{sub:requirements}
+\label{sub:vrequirements}
 In de eerste week wordt nagevraagd aan belanghebbenden van IntelliProve aan welke criteria de modellen moeten voldoen. Alle data (gezichtsfoto's) wordt verzameld. Er wordt onder andere nagegaan over welke functionaliteiten de modellen moeten beschikken en wat de verwachte prestatievereisten zijn. 
 Als resultaat verwerven we een lijst van alle functionele en niet-functionele requirements, geordend volgens belang. 
 
 \subsection{Literatuurstudie}
-\label{sub:literatuurstudie}
+\label{sub:vliteratuurstudie}
 De literatuurstudie omvat een diepgaande verkenning van facial analysis technieken en machine learning modellen. 
 Deze fase biedt inzicht in de verschillende methoden voor het extraheren van gezichtskenmerken en image preprocessing technieken, specifiek met betrekking tot het schatten van leeftijd en geslacht.
 Het doel is om kennis uit bestaand onderzoek te vergaren om effectieve methodologieën te identificeren in de huidige benaderingen van facial analysis. 
 Het eindresultaat van deze fase, die 3 weken duurt, is een samenvatting van de belangrijkste bevindingen uit de literatuurstudie, die als basis zal dienen voor de proof-of-concept.
 \subsection{Proof-of-concept}
-\label{sub:proof-of-concept}
+\label{sub:vproof-of-concept}
 Deze fase start met het verzamelen en analyseren van de datasets. Technieken zoals normalisatie en scaling van de features, feature-extractie en data augmentation worden gebruikt om de dataset voor te bereiden op modeltraining.
 Vervolgens worden verschillende machine learning algoritmen geselecteerd op basis van de bevindingen uit de literatuurstudie. De modellen worden getraind en geëvalueerd op basis van de vooropgestelde requirements. 
 De pipeline wordt beoordeeld op betrouwbaarheid en precisie op basis van de opgestelde requirements. Metrieken zoals accuracy, precision, recall, F1-score en ROC curves worden gebruikt om de modellen te evalueren.
@@ -118,18 +118,18 @@ Er worden cross-validatie technieken gebruikt om de robuustheid van de modellen 
 Deze fase vereist dan ook veel tijd en zal 6 weken duren. Het resultaat van deze fase is een proof-of-concept die bestaat uit een machine learning pipeline, die stappen voor het preprocessen van gegevens en getrainde modellen integreert voor het schatten van leeftijd en geslacht op basis van gezichtsfoto's.
 
 \subsection{Conclusie}
-\label{sub:conclusie}
+\label{sub:vconclusie}
 In de conclusiefase worden de resultaten van de evaluatie grondig geanalyseerd. De prestaties van de ontwikkelde modellen worden beoordeeld, waarbij hun sterke punten en beperkingen worden benadrukt. Het belang van een nauwkeurige schatting van leeftijd en geslacht bij de beoordeling van de geestelijke gezondheid en de implicaties voor de gezondheidszorg worden besproken. Er worden aanbevelingen gedaan voor mogelijke verbeteringen of toekomstige onderzoeksrichtingen op basis van de bevindingen en beperkingen van het project.
 \subsection{Afwerken scriptie}
-\label{sub:afwerken_scriptie}
+\label{sub:vafwerken_scriptie}
 De laatste fase, die 2 weken duurt, omvat het afwerken van de bachelorproef. Dit is het eindresultaat van het geleverde onderzoek met een proof-of-concept die zal worden ingediend. 
 
 
 %---------- Verwachte resultaten ----------------------------------------------
 \section{Verwacht resultaat, conclusie}%
-\label{sec:verwachte_resultaten}
+\label{sec:vverwachte_resultaten}
 
-Als resultaat van het onderzoek wordt een proof-of-concept opgesteld die een robuuste machine learning pipeline implementeert. We streven naar een accuracy van 75\%, wat al haalbaar bleek uit onderzoek van \textcite{Sanil2023}. Er wordt verwacht dat de modellen van Boosting, Random Forest en een ensemble de hoogste scores en accuracy opleveren. We geven naast de proof-of-concept ook een prestatie-evaluatie van de gebruikte modellen met uitgebreide analyse en vergelijking. De pipeline kan worden beoordeeld op betrouwbaarheid en precisie op basis van de opgestelde requirements. Metrieken zoals accuracy, precision, recall, F1-score en ROC-curves worden gebruikt om de modellen te evalueren. Onderstaand een mock-up van de scores met op figuur {~\ref{fig:ROC}} een ROC-curve. Dit onderzoek is van bijzonder belang voor het verbeteren van de beoordeling van de geestelijke gezondheidszorg door middel van camera-gebaseerde gezondheidsmetingen en levert een bijdrage aan de vooruitgang op dit gebied door gebruik te maken van geavanceerde algoritmen om leeftijd en geslacht nauwkeurig te voorspellen aan de hand van gezichtsopnames. Het is een opstap naar verder onderzoek in gezichtsanalyse. 
+Als resultaat van het onderzoek wordt een proof-of-concept opgesteld die een robuuste machine learning pipeline implementeert. We streven naar een accuracy van 75\%, wat al haalbaar bleek uit onderzoek van \textcite{Sanil2023}. Er wordt verwacht dat de modellen van Boosting, Random Forest en een ensemble de hoogste scores en accuracy opleveren. We geven naast de proof-of-concept ook een prestatie-evaluatie van de gebruikte modellen met uitgebreide analyse en vergelijking. De pipeline kan worden beoordeeld op betrouwbaarheid en precisie op basis van de opgestelde requirements. Metrieken zoals accuracy, precision, recall, F1-score en ROC-curves worden gebruikt om de modellen te evalueren. Onderstaand een mock-up van de scores met op figuur {~\ref{fig:vROC}} een ROC-curve. Dit onderzoek is van bijzonder belang voor het verbeteren van de beoordeling van de geestelijke gezondheidszorg door middel van camera-gebaseerde gezondheidsmetingen en levert een bijdrage aan de vooruitgang op dit gebied door gebruik te maken van geavanceerde algoritmen om leeftijd en geslacht nauwkeurig te voorspellen aan de hand van gezichtsopnames. Het is een opstap naar verder onderzoek in gezichtsanalyse. 
 
 \begin{center}
     \begin{tabular}{||c c c c c||} 
@@ -147,5 +147,5 @@ Als resultaat van het onderzoek wordt een proof-of-concept opgesteld die een rob
 \begin{figure}
     \centering
     \includegraphics[width=\columnwidth]{graphics/ROCcurve.png}
-    \caption{\label{fig:ROC}ROC curve\autocite{Gomede2023}.}
+    \caption[ROC curve]{\label{fig:vROC}ROC curve\autocite{Gomede2023}.}
 \end{figure}
