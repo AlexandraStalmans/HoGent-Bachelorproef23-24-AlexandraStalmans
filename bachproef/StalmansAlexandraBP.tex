@@ -23,6 +23,31 @@
 \usepackage[section]{minted}
 \usepackage{amsmath}
 \usepackage{enumitem}
+\usepackage{listings}
+\usepackage{xcolor}
+\definecolor{backcolour}{rgb}{0.95,0.95,0.92}
+
+\lstdefinestyle{mystyle}{
+    backgroundcolor=\color{backcolour},   
+    commentstyle=\color{hogent-darkgreen},
+    keywordstyle=\color{hogent-purple},
+    numberstyle=\tiny\color{hogent-grey},
+    stringstyle=\color{codepurple},
+    caption={\color{hogent-blue}{\protect\caption}}
+    basicstyle=\ttfamily\footnotesize,
+    breakatwhitespace=false,         
+    breaklines=true,                 
+    captionpos=b,                    
+    keepspaces=true,                 
+    numbers=left,                    
+    numbersep=5pt,                  
+    showspaces=false,                
+    showstringspaces=false,
+    showtabs=false,                  
+    tabsize=2
+}
+
+\lstset{style=mystyle}
 
 
 %% If you compile with the make_thesis.{bat,sh} script, use the following
@@ -123,7 +148,7 @@
     % If you included tables and/or source code listings, uncomment the appropriate
     % lines.
     %\listoftables
-    %\listoflistings
+    \listoflistings
     
     % Als je een lijst van ingeingen of termen wil toevoegen, dan hoort die
     % hier thuis. Gebruik bijvoorbeeld de ``glossaries'' package.
