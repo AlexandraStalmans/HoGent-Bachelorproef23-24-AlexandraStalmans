@@ -4,7 +4,7 @@
 Gezichtsanalyse bestaat uit het definiëren van menselijke gezichten in real time, met behulp van computeralgoritmen en machine learning technieken. Voor mensen en computersystemen bevat een gezichtsbeeld details zoals leeftijd, geslacht, stemming, afkomst, et cetera. \\
 \\ 
 Gezichtsanalyse omvat dan ook het lokaliseren en meten van gezichtskenmerken in een afbeelding. Vervolgens wordt het gezichtsbeeld geanalyseerd voor het extraheren van kenmerken \autocite{Sanil2023}. Gezichtsanalyse speelt dan ook een grote rol in real world applicaties, zoals animatie, identiteitsverificatie, medische diagnose, et cetera. Ondanks het bestaande onderzoekswerk over dit onderwerp, is gezichtsanalyse nog steeds een lastige taak vanwege verschillende factoren zoals veranderingen in hoek, gezichtsuitdrukkingen en achtergrond \autocite{Siddiqi2022}. \\
-
+\\
 Volgens onderzoek van \textcite{Basystiuk2023} is beeldherkenning een simpele procedure die uit slechts 3 stappen bestaat. 
 \begin{enumerate}
     \item Preprocessing: We voegen filters toe aan de afbeelding om het geschikter te maken voor herkenning.
@@ -21,21 +21,25 @@ In het onderzoek van \textcite{Sanil2023} berekenen ze de landmarks op 2 verschi
 \begin{figure}
     \centering
     \includegraphics{graphics/faciallandmarks.png}
-    \caption[Belangrijkste anthropometrische landmarks]{\label{fig:landmarks}De belangrijkste anthropometrische landmarks\autocite{Sanil2023}.}
+    \caption[Belangrijkste anthropometrische landmarks]{De belangrijkste anthropometrische landmarks\autocite{Sanil2023}.
+    \label{fig:landmarks}}
 \end{figure}
+
 
 \section{Feature extractie} \label{sec:featextractie}
 \subsection{Normalisatie}\label{sub:normalisatie}
-In onderzoek van \autocite{Chen2011} voor het voorspellen van leeftijd op basis van afbeeldingen werden de gezichtsafbeeldingen genormaliseerd voor de feature extraction plaatsvond. De geometrie van de afbeeldingen kan worden genormaliseerd op basis van de gedetecteerde features, zoals oog of mond coördinatie. De auteur maakt gebruik van een mask om de pixels die zich niet in de ovaal van de typsiche gezichtsregio bevinden te verwijderen. Dit gaat dan bijvoorbeeld over haar en hemdskragen. Zo blijven enkel de belangrijkste features van het gezicht over. Figuur {~\ref{fig:beforenormalisation}} geeft een voorbeeld van een dataset met gezichtsfoto's. In figuur {~\ref{fig:afternormalisation}} worden deze afbeeldingen genormaliseerd, waardoor er minder variaties overblijven in de afbeeldingen en we bijvoorbeeld al geen achtergrond overhouden.
+In onderzoek van \autocite{Chen2011} voor het voorspellen van leeftijd op basis van afbeeldingen werden de gezichtsafbeeldingen genormaliseerd voor de feature extractie plaatsvond. De geometrie van de afbeeldingen kan worden genormaliseerd op basis van de gedetecteerde features, zoals oog of mond coördinatie. De auteur maakt gebruik van een mask om de pixels die zich niet in de ovaal van de typsiche gezichtsregio bevinden te verwijderen. Dit gaat dan bijvoorbeeld over haar en hemdskragen. Zo blijven enkel de belangrijkste features van het gezicht over. Figuur {~\ref{fig:beforenormalisation}} geeft een voorbeeld van een dataset met gezichtsfoto's. In figuur {~\ref{fig:afternormalisation}} worden deze afbeeldingen genormaliseerd, waardoor er minder variaties overblijven in de afbeeldingen en we bijvoorbeeld al geen achtergrond overhouden.
 \begin{figure}
     \centering
     \includegraphics{graphics/beforenorm.PNG}
-    \caption[Gezichtsafbeeldingen voor normalisatie]{\label{fig:beforenormalisation}Gezichtsafbeeldingen voor normalisatie\autocite{Chen2011}.}
+    \caption[Gezichtsafbeeldingen voor normalisatie]{Gezichtsafbeeldingen voor normalisatie\autocite{Chen2011}.
+        \label{fig:beforenormalisation}}
 \end{figure}
 \begin{figure}
     \centering
     \includegraphics{graphics/afternorm.PNG}
-    \caption[Gezichtsafbeeldingen na normalisatie]{\label{fig:afternormalisation}Gezichtsafbeeldingen na het toepassen van normalisatie\autocite{Chen2011}.}
+    \caption[Gezichtsafbeeldingen na normalisatie]{Gezichtsafbeeldingen na het toepassen van normalisatie\autocite{Chen2011}.
+        \label{fig:afternormalisation}}
 \end{figure}  \\
 De gezichtsafbeeldingen kunnen ook genormaliseerd worden op basis van de coördinaten van de ogen, zodat het centrum van beide ogen van de afbeeldingen op een vaste positie liggen \autocite{Chen2011}. 
 
@@ -44,7 +48,8 @@ In het onderzoek van \textcite{Lakshmiprabha2016} worden de Active Appearance Mo
 \begin{figure}
     \centering
     \includegraphics{graphics/AAM.PNG}
-    \caption[AAM-features]{\label{fig:aam}Cohn Kanada database na toepassen van AAM \autocite{Lakshmiprabha2016}.}
+    \caption[AAM-features]{Cohn Kanada database na toepassen van AAM \autocite{Lakshmiprabha2016}.
+        \label{fig:aam}}
 \end{figure} 
 
 \subsection{LBP} \label{sub:lbp}
@@ -52,15 +57,17 @@ Local Binary Patterns (LBP) is een textuurdescriptor die gebruikt kan worden om 
 \begin{figure}
     \centering
     \includegraphics{graphics/LBP.PNG}
-    \caption[AAM-features]{\label{fig:lbp}Toepassen van LBP op een 16x16 gezichtsafbeelding resulteert in 14x14 label afbeelding \autocite{SanchezLopez2010}.}
+    \caption[AAM-features]{Toepassen van LBP op een 16x16 gezichtsafbeelding resulteert in 14x14 label afbeelding \autocite{SanchezLopez2010}.
+        \label{fig:lbp}}
 \end{figure}
 \\
 In het onderzoek van \textcite{Chen2011} wordt LBP toegepast om de gezichtsfeatures te extraheren uit elk blok die de leeftijdsinformatie bevat. Het resultaat hiervan is een feature dimensie vector van 59. Deze features worden dan samengevoegd in een holistische vector. 
 
+
 \section{Feature dimensionaliteitsreductie} \label{sec:featuredimred}
 De herkenning van gezicht focust zich voornamelijk op het detecteren van individuele features in het gezicht, zoals ogen, hoofdomtrek, mond of het definiëren van het model van gezicht door positie, grootte of relatie tussen de features \autocite{Lin2006}. Het extraheren van de features speelt een grote rol in de preprocessing fase. \\
 \\
-De Principal Component Analyse (PCA) wordt veelal gebruikt voor gezichtsherkenning. \gls{pca} is een unsupervised, statistische techniek die gebruikt wordt voor dimensionaliteitsreductie in machine learning \autocite{SalihHasan2021}. Het reduceert het hoge aantal dimensies in een grote dataset naar een lager aantal dimensies om de opslag en het verwerkingsproces te versnellen. Hierdoor is de data makkelijker te interpreteren en sneller te verwerken. De techniek behoudt het grootste aantal informatie en verwijdert redundante ruis en data. Het grote nadeel van PCA is dat de lineaire transformatie die wordt uitgevoerd om de grootste varianties te behouden, niet altijd goed geschikt is voor het op te lossen probleem, namelijk de classificatie van geslacht \autocite{Wang2010}. \\
+De Principal Component Analyse (PCA) wordt veelal gebruikt voor gezichtsherkenning. PCA is een unsupervised, statistische techniek die gebruikt wordt voor dimensionaliteitsreductie in machine learning \autocite{SalihHasan2021}. Het reduceert het hoge aantal dimensies in een grote dataset naar een lager aantal dimensies om de opslag en het verwerkingsproces te versnellen. Hierdoor is de data makkelijker te interpreteren en sneller te verwerken. De techniek behoudt het grootste aantal informatie en verwijdert redundante ruis en data. Het grote nadeel van PCA is dat de lineaire transformatie die wordt uitgevoerd om de grootste varianties te behouden, niet altijd goed geschikt is voor het op te lossen probleem, namelijk de classificatie van geslacht \autocite{Wang2010}. \\
 De feature reductie vindt typisch plaats na de feature extractie fase en voor de eigenlijke classificatie \autocite{Lakshmiprabha2016}.
 
 \section{Bestaande uitdagingen} \label{sec:uitdagingen}
@@ -89,13 +96,14 @@ Een voorbeeld voor het gebruik van Random Forest in gezichtsanalyse is figuur {~
 \begin{figure}
     \centering
     \includegraphics{graphics/headposition.png}
-    \caption[Random forest voor houding van het hoofd]{\label{fig:randomforest}Voorbeeld van een random forest voor het schatten van de houding van het hoofd\autocite{Fanelli2012}.}
-\end{figure}
+    \caption[Random forest voor houding van het hoofd]{Voorbeeld van een random forest voor het schatten van de houding van het hoofd\autocite{Fanelli2012}.
+        \label{fig:randomforest}}
+\end{figure} \\
 \\
 Het onderzoek van \textcite{Mady2018} gebruikt random forest classifier voor de herkenning en detectie van gezichten. De classifier wordt toegepast op het gezicht om dit te herkennen uit de databank. Hier wordt aangehaald wanneer we het aantal bomen in de random forest verhogen, zal ook de nauwkeurigheid verhogen, maar is het ook veel tijdrovender. De random forest is dus een trade-off tussen accuracy en tijd. Het toevoegen van Local Binary Pattern (LBP) en Histogram of Oriented Gradient(HOG) verhoogde de algemene accuracy van de classifier. 
 
 \subsection{Support Vector Machines} \label{sub:svm}
-Een Support Vector Machine (SVM) is een ML-techniek die gebruikt wordt voor patroonclassificatie en regressieanalyse \autocite{Chen2011}. Het is gebaseerd op het zoeken naar een lineaire grens tussen twee klassen van patronen.Het SVM mechanisme gaat opzoek naar de optimale classifier die de data in 2 verschillende klassen opdeelt \autocite{Rustam2018}. De optimale classifier wordt de hyperplane genoemd. Dit kunnen we vinden door de marge te maximaliseren en zal zorgen voor zo min mogelijk misclassificatie. \\
+Een Support Vector Machine (SVM) is een ML-techniek die gebruikt wordt voor patroonclassificatie en regressieanalyse \autocite{Chen2011}. Het is gebaseerd op het zoeken naar een lineaire grens tussen twee klassen van patronen. Het SVM mechanisme gaat opzoek naar de optimale classifier die de data in 2 verschillende klassen opdeelt \autocite{Rustam2018}. De optimale classifier wordt de hyperplane genoemd. Dit kunnen we vinden door de marge te maximaliseren en zal zorgen voor zo min mogelijk misclassificatie. \\
 \\
 Voor niet-lineair scheidbare data mappen we alle punten naar een feature ruimte door gebruik te maken van een kernel \autocite{Shah2012}. Na het splitsen, kunnen we de punten terug mappen naar de input ruimte met een kromme hyperplane, zoals op figuur {~\ref{fig:svm}}. \\
 Een SVM is zeer effectief wanneer een hoog aantal dimensionele ruimtes zijn. Ze zijn ook veelzijdig, aangezien we meerdere kernels kunnen gebruiken. De keuze van kernel is afhankelijk van de requirements van het model en heeft een grote invloed op de resultaten van een model. Het voordeel van een SVM model is dat het accurate voorspellingen kan maken, onafhankelijk van de grootte (image size) van de afbeeldingen. \autocite{Khan2011} \\
@@ -104,12 +112,13 @@ In het onderzoek van \textcite{Rustam2018} wordt SVM gebruikt voor de classifica
 \begin{figure}
     \centering
     \includegraphics{graphics/svm-non-lineair.PNG}
-    \caption[SVM]{\label{fig:svm}Support Vector Machine voor niet-lineair scheidbare data}
+    \caption[SVM]{Support Vector Machine voor niet-lineair scheidbare data
+        \label{fig:svm}}
 \end{figure}
 
 \subsection{Logistic Regression}\label{sub:logregression}
-Logistische regressie is een populair algoritme voor binaire classificatie taken, zoals voorspellen van geslacht \autocite{Ramon2014}. Het modelleert de relatie tussen de input variabelen en de kans dat de afbeelding tot een bepaalde geslachtscategorie behoort. Logistische regressie gebruikt de logistische funtie om een lineaire combinatie van de features te maken. Dit wordt uiteindelijk gebruikt om voorspellingen te maken.
-+ handboek deep learning en machine learning
+Logistische regressie is een populair algoritme voor binaire classificatie taken, zoals voorspellen van geslacht \autocite{Ramon2024}. Het modelleert de relatie tussen de input variabelen en de kans dat de afbeelding tot een bepaalde geslachtscategorie behoort. Logistische regressie gebruikt de logistische funtie om een lineaire combinatie van de features te maken. Dit wordt uiteindelijk gebruikt om voorspellingen te maken. Logistische regressie wordt gebruikt om de kans dat een instantie behoort tot een bepaalde klasse te voorspellen, zoals bijvoorbeeld de classificatie van spam of niet \autocite{Geron2019}. Als de instantie tot de klasse behoort, voorspelt die 1, anders 0. Dit maakt het dus een binaire classifier. 
+\\
 Het onderzoek van \textcite{Yavuz2014} gebruikt een logistisch regressiemodel om geslacht te voorspellen. Aan het model werden 2 verschillende optimisatiemethoden toegevoegd, namelijk Stochastic Gradient Following (SGF) en limited memory Broyden-Fletcher-Goldfarb-Shanno algoritme (L-BFGS). SGF is efficiënt en makkelijk te implementeren, wat het één van de meest gebruikte optimisatie algoritmes maakt. Doordat het onderzoek van \textcite{Yavuz2014} slechts een beperkte dataset gebruikt, had het L-BFGS model een grotere error rate dan het SGF model. Dit toont nogmaals aan dat een goede dataset belangrijk is. 
 
 \subsection{Ensemble}
@@ -118,7 +127,8 @@ Een set van 30 Lineaire Discriminant Analyse (LDA) dienen als basis classifiers 
 \begin{figure}
     \centering
     \includegraphics[width=\columnwidth]{graphics/ensemble.png}
-    \caption[Robuust gezichtsherkenning systeem]{\label{fig:ensemble}Robuust Gezichtsherkenning systeem\autocite{Khan2017}.}
+    \caption[Robuust gezichtsherkenning systeem]{Robuust Gezichtsherkenning systeem\autocite{Khan2017}.
+        \label{fig:ensemble}}
 \end{figure}
 
 \subsection{Multi attribution model}\label{sub:mamodel}
@@ -126,6 +136,8 @@ In het onderzoek van \autocite{Gupta2022} wordt een multi-attribution model uitg
 
 \subsection{Grid Search en Random Search} \label{sub:gridsearch}
 Hyperparameters representeren de specifieke parameters die we meegeven aan een Machine Learning model alvorens de training te beginnen \autocite{Ibtisamah2023}. De hyperparameters kunnen worden gefinetuned op verschillende configuraties om het model beter te doen presteren. Het individueel trainen van deze hyperparameters is tijdrovend en daarom kunnen zoekstrategieën gebruikt worden om meerdere hyperparameters tegelijk uit te testen om de meest geschikte eruit te halen. Grid Search en Random Search zijn de bekendste strategieën en zijn beschikbaar gesteld via Sciki-learn \autocite{scikitlearn2024}. Bij Grid Search geven we verschillende hyperparameters mee, die het model gaat onderzoeken. Bij Random Search geven we een range van hyperparameter waarden mee, wat het efficiënter maakt dan Grid Search.
+
+% list and dataset missing
 Hieronder een code voorbeeld van hoe \autocite{Educative2024} met behulp van de Grid Search verschillende hyperparameters definieert.
 \begin{lstlisting}[style=mystyle, caption={GridSearchCV}]
     from sklearn.model_selection import GridSearchCV, train_test_split
@@ -135,36 +147,43 @@ Hieronder een code voorbeeld van hoe \autocite{Educative2024} met behulp van de 
     X,y = load_diabetes(return_X_y=True)
     X_train, X_test, y_train, y_test = train_test_split(X, y, test_size=0.33, random_state=42)
     
-    # Creating a Model
+    % Creating a Model
     model = GradientBoostingRegressor()
     
-    # Define the hyperparameter grid
+    % Define the hyperparameter grid
     param_grid = {'learning_rate': [0.2,0.02,0.02,1],
         'max_depth'    : [2,4,6,8,10]
     }
     
-    # Create the GridSearchCV object
+    % Create the GridSearchCV object
     grid_search = GridSearchCV(estimator=model, param_grid=param_grid, cv=5, n_jobs = -1)
     
-    # Perform the grid search
+    % Perform the grid search
     grid_search.fit(X_train, y_train)
     
-    # Access the best hyperparameters and best score
+    % Access the best hyperparameters and best score
     best_learning_rate = grid_search.best_params_['learning_rate']
     best_max_depth = grid_search.best_params_['max_depth']
     best_score = grid_search.best_score_
     
-    # Print the results
+    % Print the results
     print("Best learning rate:", best_learning_rate)
     print("Best Depth:", best_max_depth)
     print("Best score (MSE):", best_score)
 \end{lstlisting}
-
+% dataset section gives errors
 
 \section{Dataset} \label{sec:dataset}
-Uit onderzoek van \textcite{Karkkainen2021} bleek dat bestaande, publieke datasets sterk bevoordeeld zijn naar blanke mensen. Modellen die getraind worden op enkel 1 publieke dataset vertonen dan ook slechte en inconsistente resultaten. Kärkkäinen gebruikt in zijn onderzoek een zelf samengestelde dataset, met 108501 afbeeldingen die verdeeld zijn over elk ras. De resultaten van het onderzoek op de dataset vertonen een betere accuraatheid over verschillende rassen en leeftijdsgroepen. \\
+Uit onderzoek van \textcite{Karkkainen2021} bleek dat bestaande, publieke datasets sterk bevoordeeld zijn naar blanke mensen. Modellen die getraind worden op enkel 1 publieke dataset vertonen dan ook slechte en inconsistente resultaten. Kärkkäinen gebruikt in zijn onderzoek een zelf samengestelde dataset, met 108501 afbeeldingen die verdeeld zijn over elk ras. De resultaten van het onderzoek op de dataset vertonen een betere accuraatheid over verschillende rassen en leeftijdsgroepen. Op figuur {~\ref{fig:datasets}} wordt de verdeling over geslacht en ras van de Fairface dataset die \textcite{Karkkainen2021} gebruikt weergegeven tegenover de UTKFace en LFWA+ dataset. Hieruit is duidelijk dat LFWA+ biased is naar witte mannen en dus niet geschikt is om een accuraat onderzoek uit te voeren. \begin{figure}
+    \centering
+    \includegraphics[width=\columnwidth]{graphics/datasets.png}
+    \caption[FairFace, UTKFace en LFWA+ datasets]{ FairFace, UTKFace en LFWA+ datasets \autocite{Karkkainen2021}.
+        \label{fig:datasets}}
+\end{figure}\\
 \\
-Ook in het onderzoek van \textcite{Buolamwini2018} wordt een eigen dataset aangemaakt. Hier wordt niet enkel gekeken naar ras, maar bijvoorbeeld ook naar dikte en hoeveelheid haar. Het model moet zodoende dezelfde accuraatheid geven over verschillende leeftijdsgroepen, geslachten, rassen, et cetera. Uit het onderzoek bleek ook dat resultaten bij modellen die gebruik maken van Microsoft's Face Detect of Face++ een slechtere precisiescore vertonen, mogelijks door bias in trainingsdata.
+Ook in het onderzoek van \textcite{Buolamwini2018} wordt een eigen dataset aangemaakt. Hier wordt niet enkel gekeken naar ras, maar bijvoorbeeld ook naar dikte en hoeveelheid haar. Het model moet zodoende dezelfde accuraatheid geven over verschillende leeftijdsgroepen, geslachten, rassen, et cetera. Uit het onderzoek bleek ook dat resultaten bij modellen die gebruik maken van Microsoft's Face Detect of Face++ een slechtere precisiescore vertonen, mogelijks door bias in trainingsdata. 
+ 
+
 
 \section{Voorspellen van geslacht en leeftijd} \label{sec:voorspellen}
 Het eerste baanbrekende onderzoek op het vlak van classificatie op basis van gezichtsafbeeldingen dateert uit 1994. \textcite{Kwon1994} voorspelde in dit onderzoek slechts 3 leeftijdsgroepen: baby's, tieners en volwassen. Het onderzoek focuste zich op het vinden van de primaire features in het gezicht, zoals ogen, mond en neus, en combineerde dit met secundaire features, zoals rimpels. Hiermee toonde het onderzoek aan dat de gezichtsfeatures een grote rol spelen in het classificeren van leeftijd. Dit onderzoek vormt dan ook de basis voor vele verdere onderzoeken op het vlak van classificatie.  \\
@@ -176,11 +195,12 @@ Het voorspellen van leeftijd kan ingedeeld worden in 2 categorieën: leeftijdsgr
 
 \section{Performantiescores} \label{sec:performantiescores}
 Er kunnen verschillende evaluaties uitgevoerd worden om de performantie van het model te testen \autocite{Sanil2023}. Er kan hiervoor een confusion matrix worden opgesteld, zoals weergegeven in figuur {~\ref{fig:confusionmatrix}}. Deze bevat de True Positives (TP), True Negatives (TN), False Positives (FP) en False Negatives (FN), waarbij TP en TN de correcte voorspellingen weergeven en FP en FN de incorrecte voorspellingen. De confusion matrix werkt voor binaire voorspellingen, ideaal voor de voorspelling van geslacht. Het onderzoek van \textcite{Sanil2023} berekent op basis van de opgestelde matrix 5 scores.
- 
+
 \begin{figure}
     \centering
     \includegraphics{graphics/confusionmatrix.PNG}
-    \caption[Confusion matrix]{\label{fig:confusionmatrix}Confusion matrix\autocite{Narkhede2018}.}
+    \caption[Confusion matrix]{Confusion matrix\autocite{Narkhede2018}.
+        \label{fig:confusionmatrix}}
 \end{figure}
 \begin{enumerate}
     \item De accuracy geeft weer hoe goed het model voorspellingen maakt. Dit wordt voorgesteld door het aantal correcte voorspellingen  \autocite{Narkhede2018}.
@@ -203,6 +223,7 @@ Voor de voorspelling van leeftijd is het ook aangeraden om 2 andere ratios te ge
 \begin{enumerate}
     \item De TAR geeft het aantal juist voorspelde afbeeldingen binnen de opgegeven leeftijdscategorie.
     \[ \text{True Acceptance Rate} = \frac{\text{Juist voorspelde leeftijdscategorie}}{\text{Totale aantal afbeeldingen}} x 100 \]
-     \item De FRR geeft het aantal fout voorspelde afbeeldingen binnen de opgegeven leeftijdscategorie.
+    \item De FRR geeft het aantal fout voorspelde afbeeldingen binnen de opgegeven leeftijdscategorie.
     \[ \text{False Rejected Rate} = \frac{\text{Fout voorspelde leeftijdscategorie}}{\text{Totale aantal afbeeldingen}}  x 100 \]
 \end{enumerate}
+
