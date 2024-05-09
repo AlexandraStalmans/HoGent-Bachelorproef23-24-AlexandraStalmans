@@ -63,12 +63,31 @@ Local Binary Patterns (LBP) is een textuurdescriptor die gebruikt kan worden om 
 \\
 In het onderzoek van \textcite{Chen2011} wordt LBP toegepast om de gezichtsfeatures te extraheren uit elk blok die de leeftijdsinformatie bevat. Het resultaat hiervan is een feature dimensie vector van 59. Deze features worden dan samengevoegd in een holistische vector. 
 
+\subsection{HOG features} \label{sub:hog}
+Histograms of Oriented Gradients (HOG) begint met het tellen van de oriëntatie van de gradiënten in gelokaliseerde delen van een afbeelding. De afbeelding wordt verdeeld in kleine verbonden gebieden, genaamd cellen, en voor elke cel wordt een
+histogram van gradiëntrichtingen of randoriëntaties voor de pixels binnen de cel gecompileerd \autocite{Deniz2011}. \\
+De HOG features worden exclusief gebruikt voor gezichtsdetectie. De features die uit de omgeving van de landmarks in het gezicht worden gehaald, worden gebruikt voor classificatie en maken gebruik van het nearest neighbour algoritme en de Euclidische afstand. \\
+\\
+\textcite{Tomasi2015} gebruikt de HOG features om menselijke voetgangers te detecteren. Figuur {~\ref{fig:hog}} geeft de extractie van de HOG features uit een afbeelding weer. 
+\begin{figure}
+    \centering
+    \includegraphics{graphics/hog.PNG}
+    \caption[HOG features]{Toepassen van HOG op een gezichtsafbeelding \autocite{Tomasi2015}.
+        \label{fig:hog}}
+\end{figure}
 
 \section{Feature dimensionaliteitsreductie} \label{sec:featuredimred}
 De herkenning van gezicht focust zich voornamelijk op het detecteren van individuele features in het gezicht, zoals ogen, hoofdomtrek, mond of het definiëren van het model van gezicht door positie, grootte of relatie tussen de features \autocite{Lin2006}. Het extraheren van de features speelt een grote rol in de preprocessing fase. \\
 \\
+
+\subsection{PCA} \label{sub:PCA}
 De Principal Component Analyse (PCA) wordt veelal gebruikt voor gezichtsherkenning. PCA is een unsupervised, statistische techniek die gebruikt wordt voor dimensionaliteitsreductie in machine learning \autocite{SalihHasan2021}. Het reduceert het hoge aantal dimensies in een grote dataset naar een lager aantal dimensies om de opslag en het verwerkingsproces te versnellen. Hierdoor is de data makkelijker te interpreteren en sneller te verwerken. De techniek behoudt het grootste aantal informatie en verwijdert redundante ruis en data. Het grote nadeel van PCA is dat de lineaire transformatie die wordt uitgevoerd om de grootste varianties te behouden, niet altijd goed geschikt is voor het op te lossen probleem, namelijk de classificatie van geslacht \autocite{Wang2010}. \\
 De feature reductie vindt typisch plaats na de feature extractie fase en voor de eigenlijke classificatie \autocite{Lakshmiprabha2016}.
+\\
+\subsection{Truncated SVD} \label{sub:truncatedsvd}
+De Truncated singular value decomposition, ofwel Truncated SVD, is een benaderingsmethode voor lage-rankmatrices die veelal gebruikt wordt in data science, machine learning en lineaire algebra \autocite{Yeh2022}. \\
+De benadering van de lage-rankmatrix is een dimensionaliteitsreductie methode die van belang is bij de groeiende hoeveelheid data waar traditionele methoden niet mee kunnen omgaan. Deze lage-matrix benaderingsmethoden benaderen een bepaalde matrix als product van meerdere kleinere matrices en wordt gebruikt om de geheugenkost en tijd die nodig is om de modellen te trainen te verminderen. \\
+Truncated SVD is de optimale lage-rank matrix benadering en wordt hierdoor toegepast in machine learning als dimensionaliteitsreductie. PCA is ook een vorm van Truncated SVD, maar hierbij wordt de singulaire waarde, \textit{k}, bepaald met een statistische interpretatie.   
 
 \section{Bestaande uitdagingen} \label{sec:uitdagingen}
 Ondanks het uitgebreide onderzoekwerk, heersen er nog vele uitdagingen op het vlak van gezichtsanalyse. Deze uitdagingen zijn het gevolg van verschillende factoren zoals gezichtsuitdrukkingen, ruis, belichting, et cetera. Om de nauwkeurigheid van de gezichtsherkenning te verbeteren, is het belangrijk om taken van de gezichtsanalyse met elkaar te correleren. Het is bijvoorbeeld zeer waarschijnlijk dat mannen een baard of snor kunnen hebben, maar vrouwen en kinderen niet \autocite{Siddiqi2022}. 
@@ -135,7 +154,14 @@ Een set van 30 Lineaire Discriminant Analyse (LDA) dienen als basis classifiers 
 In het onderzoek van \autocite{Gupta2022} wordt een multi-attribution model uitgewerkt. Dit voorspelt leeftijd en geslacht door middel van slechts 1 model. Het multi-attribution model voorspelt dus beide: leeftijd en geslacht. Het model van \autocite{Guo2014}, dat gebruik maakt van de Biologically Inspired Feature (BIF), gaf betere resultaten in vergelijking met individuele feature modellen. Een CNN is het meest gebruikte model voor multi-attribution, maar dit valt buiten de scope van deze bachelorproef.
 
 \subsection{Grid Search en Random Search} \label{sub:gridsearch}
-Hyperparameters representeren de specifieke parameters die we meegeven aan een Machine Learning model alvorens de training te beginnen \autocite{Ibtisamah2023}. De hyperparameters kunnen worden gefinetuned op verschillende configuraties om het model beter te doen presteren. Het individueel trainen van deze hyperparameters is tijdrovend en daarom kunnen zoekstrategieën gebruikt worden om meerdere hyperparameters tegelijk uit te testen om de meest geschikte eruit te halen. Grid Search en Random Search zijn de bekendste strategieën en zijn beschikbaar gesteld via Sciki-learn \autocite{scikitlearn2024}. Bij Grid Search geven we verschillende hyperparameters mee, die het model gaat onderzoeken. Bij Random Search geven we een range van hyperparameter waarden mee, wat het efficiënter maakt dan Grid Search.
+Hyperparameters representeren de specifieke parameters die we meegeven aan een Machine Learning model alvorens de training te beginnen \autocite{Ibtisamah2023}. De hyperparameters kunnen worden gefinetuned op verschillende configuraties om het model beter te doen presteren. Het individueel trainen van deze hyperparameters is tijdrovend en daarom kunnen zoekstrategieën gebruikt worden om meerdere hyperparameters tegelijk uit te testen om de meest geschikte eruit te halen. Grid Search en Random Search zijn de bekendste strategieën en zijn beschikbaar gesteld via Scikit-learn \autocite{ScikitLearn2024}. Bij Grid Search geven we verschillende hyperparameters mee, die het model gaat onderzoeken. Bij Random Search geven we een range van hyperparameter waarden mee, wat het efficiënter maakt dan Grid Search.  Grid Search maakt gebruik van cross validatie, waarbij de dataset in willekeurige groepen wordt opgedeeld \autocite{Beheshti2022}. Een testgroep wordt opzij gehouden en de overige groepen worden getraind. Dit proces wordt herhaald tot elke groep testgroep is geweest. Hiervan wordt dan het gemiddelde genomen. De standaardwaarde voor het aantal herhalingen is 5. Figuur ~\ref{fig:crossval} geeft hier een visuele representatie van. 
+
+\begin{figure}[H]
+    \centering
+    \includegraphics{graphics/gridsearch.png}
+    \caption[Cross validatie voor Grid Search]{Cross validatie voor Grid Search \autocite{Beheshti2022}.
+        \label{fig:crossval}}
+\end{figure}\\
 
 % list and dataset missing
 Hieronder een code voorbeeld van hoe \autocite{Educative2024} met behulp van de Grid Search verschillende hyperparameters definieert.
@@ -174,7 +200,8 @@ Hieronder een code voorbeeld van hoe \autocite{Educative2024} met behulp van de 
 % dataset section gives errors
 
 \section{Dataset} \label{sec:dataset}
-Uit onderzoek van \textcite{Karkkainen2021} bleek dat bestaande, publieke datasets sterk bevoordeeld zijn naar blanke mensen. Modellen die getraind worden op enkel 1 publieke dataset vertonen dan ook slechte en inconsistente resultaten. Kärkkäinen gebruikt in zijn onderzoek een zelf samengestelde dataset, met 108501 afbeeldingen die verdeeld zijn over elk ras. De resultaten van het onderzoek op de dataset vertonen een betere accuraatheid over verschillende rassen en leeftijdsgroepen. Op figuur {~\ref{fig:datasets}} wordt de verdeling over geslacht en ras van de Fairface dataset die \textcite{Karkkainen2021} gebruikt weergegeven tegenover de UTKFace en LFWA+ dataset. Hieruit is duidelijk dat LFWA+ biased is naar witte mannen en dus niet geschikt is om een accuraat onderzoek uit te voeren. \begin{figure}
+Uit onderzoek van \textcite{Karkkainen2021} bleek dat bestaande, publieke datasets sterk bevoordeeld zijn naar blanke mensen. Modellen die getraind worden op enkel 1 publieke dataset vertonen dan ook slechte en inconsistente resultaten. Kärkkäinen gebruikt in zijn onderzoek een zelf samengestelde dataset, met 108501 afbeeldingen die verdeeld zijn over elk ras. De resultaten van het onderzoek op de dataset vertonen een betere accuraatheid over verschillende rassen en leeftijdsgroepen. Op figuur {~\ref{fig:datasets}} wordt de verdeling over geslacht en ras van de Fairface dataset die \textcite{Karkkainen2021} gebruikt weergegeven tegenover de UTKFace en LFWA+ dataset. Hieruit is duidelijk dat LFWA+ biased is naar witte mannen en dus niet geschikt is om een accuraat onderzoek uit te voeren. 
+\begin{figure}
     \centering
     \includegraphics[width=\columnwidth]{graphics/datasets.png}
     \caption[FairFace, UTKFace en LFWA+ datasets]{ FairFace, UTKFace en LFWA+ datasets \autocite{Karkkainen2021}.

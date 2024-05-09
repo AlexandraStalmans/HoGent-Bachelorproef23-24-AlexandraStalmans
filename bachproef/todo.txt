@@ -1,1 +1,13 @@
-- Logistic Regression: handboek machine learning als bron
+
+- uitleg over 5 landmarks + foto -> niet genoeg punten om volledig gezichtsvorm te krijgen 
+- verdeling van leeftijd & geslacht in train & validatie dataset
+
+
+
+MODELLEN TRAINEN:
+
+- Voting Classifier: leeftijd, geslacht, beide
+- Bagging Classifier: leeftijd, geslacht, beide
+
+
+
